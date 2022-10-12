@@ -1,0 +1,37 @@
+import { LightningElement ,wire,api} from 'lwc';
+import getRecords from '@salesforce/apex/tableController.getRecords';
+export default class PracticeDynamicCustomDataTable extends LightningElement
+ {
+    @api actualData;
+    @api tableheader;
+    @api objectName;
+
+    @wire(getRecords,{'objName' : '$objectName'})
+    wiredContacts({error,data})
+    {
+        if(data)
+        {
+            this.actualData = data;
+            console.log('Inside Contact Table');
+        }
+        else if(error)
+        {
+            console.log('Contact Error-->'+JSON.stringify(error));
+        }
+    }
+
+    /*connectedCallback()
+    {
+        getRecords({'objName' : this.objectName})
+        .then((result) => 
+        {
+            this.actualData = result;
+          //  console.log('Contact Data-->'+JSON.stringify(this.actualData));
+        })
+        .catch((error) => 
+        {
+            console.log('Error Messages-->'+JSON.stringify(error));
+        })
+        
+    }*/
+ }
