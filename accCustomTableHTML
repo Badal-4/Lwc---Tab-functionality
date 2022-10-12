@@ -1,0 +1,41 @@
+<template>
+    
+        
+    <div class="tableStyle">
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Id</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <template if:true={actualData}>
+                    <template for:each={actualData} for:item="item">
+                        <tr key={item.Id}>
+                            
+                          <td>
+                            <lightning-input type="checkbox"  ></lightning-input>
+                          </td>
+                                <td >
+                                  
+                                    {item.Id}
+                                </td>
+                                <td>
+                                  
+                                    {item.Name}
+                                </td>
+                            
+                        </tr>
+                    </template>
+                </template>
+            </tbody>
+        </table>
+    </div>
+<!--<template for:each={actualData} for:item="acc">
+{acc.Name}
+</template>-->
+
+</template>
