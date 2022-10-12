@@ -1,0 +1,51 @@
+import { LightningElement ,wire,api} from 'lwc';
+import getRecords from '@salesforce/apex/tableController.getRecords';
+export default class PracticeDynamicCustomDataTable extends LightningElement
+ {
+    @api actualData;
+    @api tableheader;
+    @api objectName;
+    object;
+   /*@api get objectName() {
+    return this.object;
+}
+set objectName(value) {
+    this.setAttribute('objectName', value);
+    this.object = value;
+    this.handleValueChange(value);
+}
+
+//a method called in setter
+handleValueChange(value) {
+    console.log('Change value-->'+value);
+    
+}*/
+    @wire(getRecords,{'objName' : '$objectName'})
+    wiredAccounts({error,data})
+    {
+        if(data)
+        {
+            this.actualData = data;
+            console.log('Inside Account Table');
+        }
+        else if(error)
+        {
+            console.log('Error Message-->'+error);
+        }
+    } 
+    /*
+       connectedCallback()
+    {
+        getRecords({'objName' : this.objectName})
+        .then((result) => 
+        {
+            this.actualData = result;
+            console.log('Account Table Data-->'+JSON.stringify(this.actualData));
+        })
+        .catch((error) => 
+        {
+            console.log('Error Message-->'+error);
+        })
+        
+    }*/
+ }
