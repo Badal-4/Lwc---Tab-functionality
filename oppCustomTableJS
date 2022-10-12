@@ -1,0 +1,35 @@
+import { LightningElement ,wire,api} from 'lwc';
+import getRecords from '@salesforce/apex/tableController.getRecords';
+export default class PracticeDynamicCustomDataTable extends LightningElement
+ {
+    @api actualData;
+    @api tableheader;
+    @api objectName;
+    /*@wire(getRecords,{'objName' : '$objectName'})
+    wireOpp({error,data})
+    {
+        if(data)
+        {
+            this.actualData = data;
+            console.log('Inside Opportunity Table');
+        }
+        else if(error)
+        {
+            console.log('Opportunity Error-->'+JSON.stringify(error));
+        }
+    }*/ 
+    connectedCallback()
+    {
+        getRecords({'objName' : this.objectName})
+        .then((result) => 
+        {
+            this.actualData = result;
+            console.log('Opportunity Data-->'+JSON.stringify(this.actualData));
+        })
+        .catch((error) => 
+        {
+            console.log('Error Message-->'+error);
+        })
+        
+    }
+ }
