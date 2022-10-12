@@ -1,0 +1,81 @@
+<template>
+<lightning-layout multiple-rows="true">
+
+    <lightning-layout-item>
+        <c-practice-custom-lookup obj-name="User" label="Transfer From" onlookupselected={handleCustomVal}></c-practice-custom-lookup>
+    </lightning-layout-item> &nbsp;&nbsp;
+
+    <lightning-layout-item>
+        <c-practice-custom-lookup obj-name="User" label="Transfer To" onlookupselected={handleCustomVal}></c-practice-custom-lookup>
+    </lightning-layout-item>
+
+</lightning-layout> 
+
+
+<h2 class="header"><b>Records List</b></h2>
+
+<div class="slds-box">  
+    <lightning-input type="checkbox" label="Account"  name="account" onchange={handleAcc} value="Account"></lightning-input>
+    <lightning-input type="checkbox" label="Contact" name="contact" onchange={handleContacts} value="Contact"></lightning-input>
+    <lightning-input type="checkbox" label="Opportunity" name="opportunity" onchange={handleOpportunity} value="Opportunity"></lightning-input>  
+</div>
+ 
+
+  <!--<lightning-tabset selected-tab-id={selectedTab}>-->
+<!--<lightning-tabset active-tab-value="">
+
+    <template if:true={showAccounts}>
+        <lightning-tab label="Account" value="Account" id="Account" >
+              <c-acc-custom-table object-name={objAccName}></c-acc-custom-table>
+        </lightning-tab>
+    </template>
+
+    <template if:true={showContacts}>
+        <lightning-tab label="Contact" value="Contact" id="Contact" >
+              <c-con-custom-table object-name={objConName}></c-con-custom-table>
+        </lightning-tab>
+    </template>
+
+    <template if:true={showOpp}>
+        <lightning-tab label="Opportunity" value="Opportunity" id="Opportunity" >
+            <c-opp-custom-table object-name={objOppName}></c-opp-custom-table>
+        </lightning-tab>
+    </template>
+
+</lightning-tabset>
+
+<lightning-button label="Change Tab" variant="destructive" onclick={handleClick}></lightning-button>-->
+<div class="slds-tabs_default">
+    <ul class="slds-tabs_default__nav" role="tablist">
+        <template if:true={showAccountsTab}>
+            <li data-id="divblock1" class={accClass} title="Item One" role="presentation">
+                <span class="slds-tabs_default__link" href="#" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item" onclick={handleAccClick}>Account</span>
+            </li>
+        </template>
+
+        <template if:true={showContactsTab}>
+            <li data-id="divblock12" class={conClass} title="Item Two" role="presentation">
+                <span class="slds-tabs_default__link" href="#" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" id="tab-default-2__item" onclick={handleConClick}>Contact</span>
+            </li>
+        </template>
+
+        <template if:true={showOppTab}>
+            <li data-id="divblock3" class={oppClass} title="Item Three" role="presentation">
+                <a class="slds-tabs_default__link" href="#" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-3" id="tab-default-3__item" onclick={handleOppClick}>Opportunity</a>
+            </li>
+        </template>
+    </ul>
+
+    <template if:true={showAccounts}>
+       <div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item"><c-acc-custom-table object-name={objAccName}></c-acc-custom-table></div>
+    </template>
+
+    <template if:true={showContacts}>
+       <div id="tab-default-2" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-2__item" onclick={handleConClick}><c-con-custom-table object-name={objConName}></c-con-custom-table></div>
+    </template>
+
+    <template if:true={showOpp}>
+       <div id="tab-default-3" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-3__item"><c-opp-custom-table object-name={objOppName}></c-opp-custom-table></div>
+    </template>
+  </div>
+</template>
