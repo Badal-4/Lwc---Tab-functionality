@@ -1,0 +1,63 @@
+public with sharing class tableController 
+{
+   @AuraEnabled (cacheable=true)
+   public static List<Account> getRcd(String objName,String uId)
+   {
+      List<sObject> recordList = new List<sObject>();
+      String query = '';
+      if(objName == 'account')
+      {
+           query = 'Select Id,Name from '+objName;
+           recordList = Database.query(query);
+
+           
+      }
+
+      if(objName == 'contact')
+      {
+           query = 'Select Id,FirstName,LastName from '+objName;
+           recordList = Database.query(query);
+
+           
+      }
+      if(objName == 'opportunity')
+      {
+           query = 'Select Id,Name from '+objName;
+           recordList = Database.query(query);
+
+         
+      }
+
+      if(!recordList.isEmpty())
+           {
+            return recordList;
+           }
+           else 
+           {
+            return null;
+           }
+   }
+
+   @AuraEnabled (cacheable=true)
+   public static List<sObject> getRecords(String objName)
+   {
+      List<sObject> recordList = new List<sObject>();
+
+      String query = '';
+      if(objName != null)
+      {
+         query = 'select Id,Name from '+objName;
+      }
+      recordList = Database.query(query);
+
+      if(!recordList.isEmpty())
+      {
+         return recordList;
+      }
+      else 
+      {
+         return null;
+      }
+   }
+
+}
