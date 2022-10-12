@@ -1,0 +1,105 @@
+import { LightningElement ,track,api} from 'lwc';
+
+export default class Practice_ChangeOwnerCmp extends LightningElement 
+{
+   showAccounts = false;
+   showContacts = false;
+   showOpp = false;
+   value = '';
+   objAccName = '';
+   objConName;
+   objOppName;
+   userId;
+   activeTab = '';
+   showAccountsTab;
+   showContactsTab;
+   showOppTab;
+   accClass = 'slds-tabs_default__item ';
+   conClass = 'slds-tabs_default__item ';
+   oppClass = 'slds-tabs_default__item ';
+  
+    handleAcc(event)
+    { 
+      this.showAccounts = event.target.checked;    
+      this.showAccountsTab  = event.target.checked; 
+      console.log('Account Value-->'+this.showAccounts);
+     // this.template.querySelector('lightning-tabset').activeTabValue = 'Account';
+      if(this.showAccounts)
+      {
+         this.objAccName = event.target.value;
+         this.objAccName = event.target.value;
+         console.log('Account Info-->'+this.objAccName);
+         //this.template.querySelector('lightning-tabset').activeTabValue = 'Account';
+      }
+    }
+
+   handleContacts(event)
+   {
+      this.showContacts = event.target.checked;
+      this.showContactsTab = event.target.checked;
+      console.log('Contact Value-->'+this.showContacts);
+      //this.showContacts = !this.showContacts;
+     // this.template.querySelector('lightning-tabset').activeTabValue = 'Contact';
+      if(this.showContacts)
+      {
+         this.objConName = event.target.name;
+         console.log('Contact Info-->'+this.objConName);
+        // this.template.querySelector('lightning-tabset').activeTabValue = 'Contact';
+      }
+   }
+
+   handleOpportunity(event)
+   {
+      this.showOpp = event.target.checked;
+      this.showOppTab = event.target.checked;
+      //this.showOpp = !this.showOpp;
+      //this.template.querySelector('lightning-tabset').activeTabValue = 'Opportunity';
+      if(this.showOpp)
+      {
+         this.objOppName = event.target.name;
+         console.log('Opportunity Info-->'+this.objOppName);
+        // this.template.querySelector('lightning-tabset').activeTabValue = 'Opportunity';
+      }
+   }
+
+   handleSelection(event)
+   {
+      this.userId = event.detail;
+      console.group('Selected User Id==>'+this.userId);
+   }
+
+   handleAccClick(event)
+   {
+      this.showAccounts = true;
+      this.showContacts = false;
+      this.showOpp = false;
+      //this.template.querySelector('[data-id="divblock1"]').className='slds-tabs_default__item slds-is-active';
+      this.accClass = 'slds-tabs_default__item slds-is-active';
+      this.conClass = 'slds-tabs_default__item ';
+      this.oppClass = 'slds-tabs_default__item ';
+      console.log('Account Clicked');
+   }
+
+   handleConClick(event)
+   {
+      this.showContacts = true;
+      this.showAccounts = false;
+      this.showOpp = false;
+      console.log('Contact Clicked');
+      this.conClass = 'slds-tabs_default__item slds-is-active';
+      this.accClass = 'slds-tabs_default__item ';
+      this.oppClass = 'slds-tabs_default__item ';
+   }
+
+   handleOppClick(event)
+   {
+      this.showOpp = true;
+      this.showAccounts = false;
+      this.showContacts = false;
+      console.log('Opportunity Clicked');
+      this.oppClass = 'slds-tabs_default__item slds-is-active';
+      this.accClass = 'slds-tabs_default__item ';
+      this.conClass = 'slds-tabs_default__item ';
+   }
+}
+      
